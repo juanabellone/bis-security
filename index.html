@@ -634,6 +634,95 @@
       color: var(--muted);
     }
 
+    /* ── CLIENTES ── */
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .client-card {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      background: var(--navy-mid);
+      border: 1px solid rgba(26,138,110,0.18);
+      border-radius: 8px;
+      padding: 28px 32px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+
+    .client-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-3px);
+    }
+
+    .client-card-logo {
+      flex-shrink: 0;
+      width: 90px;
+      height: 90px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(200,205,216,0.12);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .client-card-logo img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.85;
+    }
+
+    .client-card-logo--text {
+      background: rgba(26,138,110,0.12);
+      border-color: rgba(26,138,110,0.25);
+    }
+
+    .client-card-logo--text span {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--teal-lt);
+      letter-spacing: 0.05em;
+    }
+
+    .client-card-body { flex: 1; }
+
+    .client-card-body h3 {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .client-card-body p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .client-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(26,138,110,0.12);
+      border: 1px solid rgba(26,138,110,0.25);
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal-lt);
+    }
+
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(28px); }
@@ -703,6 +792,9 @@
       .contact-form button { width: 100%; text-align: center; }
 
       footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 5%; }
+      .clients-grid { grid-template-columns: 1fr; }
+      .client-card { flex-direction: column; text-align: center; padding: 24px 20px; }
+      .client-card-logo { width: 70px; height: 70px; }
     }
   </style>
 </head>
@@ -807,15 +899,7 @@
         <li>Personal técnico propio capacitado y certificado.</li>
         <li>Soluciones a medida para cada tipo de industria y entorno.</li>
       </ul>
-      <div class="clients-strip">
-        <p class="clients-label">Clientes que confían en nosotros</p>
-        <div class="clients-logos">
-          <span class="client-pill">Telefónica</span>
-          <span class="client-pill">Edelap</span>
-          <span class="client-pill">Industrias</span>
-          <span class="client-pill">Infraestructura pública</span>
-        </div>
-      </div>
+
     </div>
     <div class="nosotros-visual">
       <img src="patch-rj45.png" alt="Infraestructura de red BIS Security" />
@@ -823,6 +907,60 @@
         <div class="badge-num">+10</div>
         <div class="badge-txt">Años protegiendo empresas</div>
       </div>
+    </div>
+  </section>
+
+  <!-- CLIENTES -->
+  <section id="clientes" style="background: #07101f; padding: 80px 6%;">
+    <p class="section-label">Confianza comprobada</p>
+    <h2>Clientes que <em>confían</em> en nosotros</h2>
+    <p class="section-intro">Empresas e instituciones que eligieron BIS Security para proteger su infraestructura.</p>
+    <div class="clients-grid">
+
+      <div class="client-card">
+        <div class="client-card-logo">
+          <img src="telefonica-logo.png" alt="Telefónica" />
+        </div>
+        <div class="client-card-body">
+          <h3>Telefónica</h3>
+          <p>Solución integral de videovigilancia y protección perimetral para infraestructura de telecomunicaciones en la región.</p>
+          <span class="client-tag">Telecomunicaciones</span>
+        </div>
+      </div>
+
+      <div class="client-card">
+        <div class="client-card-logo">
+          <img src="edelap-logo.png" alt="Edelap" />
+        </div>
+        <div class="client-card-body">
+          <h3>Edelap</h3>
+          <p>Monitoreo en tiempo real y protección contra vandalismo para subestaciones eléctricas y redes de distribución.</p>
+          <span class="client-tag">Energía eléctrica</span>
+        </div>
+      </div>
+
+      <div class="client-card">
+        <div class="client-card-logo client-card-logo--text">
+          <span>IE</span>
+        </div>
+        <div class="client-card-body">
+          <h3>Industrias y empresas</h3>
+          <p>Cobertura 360° para predios industriales con detección de intrusos, control de acceso y respuesta inmediata.</p>
+          <span class="client-tag">Sector industrial</span>
+        </div>
+      </div>
+
+      <div class="client-card">
+        <div class="client-card-logo client-card-logo--text">
+          <span>IP</span>
+        </div>
+        <div class="client-card-body">
+          <h3>Infraestructura pública</h3>
+          <p>Sistemas de seguridad para organismos del estado con redundancia geográfica y monitoreo centralizado.</p>
+          <span class="client-tag">Sector público</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
