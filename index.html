@@ -1,272 +1,848 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BIS Security — Seguridad Electrónica</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-      --navy: #0a1628;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIS Security — Seguridad Electrónica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    --navy-mid: #0f2040;
+    :root {
+      --navy:    #0a1628;
+      --navy-mid:#112240;
+      --teal:    #1a8a6e;
+      --teal-lt: #22b58f;
+      --silver:  #c8cdd8;
+      --white:   #f4f6f9;
+      --text:    #e2e8f0;
+      --muted:   #8a9ab5;
+    }
 
-    --accent: #e8a020;
+    html { scroll-behavior: smooth; }
 
-    --accent-dim: #c47d10;
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
 
-    --text: #e8e6e0;
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(10, 22, 40, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(26, 138, 110, 0.18);
+    }
 
-    --text-muted: #8a9ab5;
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-decoration: none;
+    }
 
-    --card-bg: #0d1e35;
+    .nav-logo span { color: var(--teal-lt); }
 
-    --border: rgba(255,255,255,0.07);
-  }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Barlow', sans-serif; background: var(--navy); color: var(--text); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 36px;
+    }
 
-  nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    background: rgba(10,22,40,0.92); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5vw; height: 64px;
-  }
-  .logo { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 2px; color: var(--accent); }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-cta { background: var(--accent); color: var(--navy); font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 10px 22px; border: none; cursor: pointer; font-family: 'Barlow', sans-serif; transition: background 0.2s; }
-  .nav-cta:hover { background: var(--accent-dim); }
+    nav ul a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--silver);
+      transition: color 0.2s;
+    }
 
-  .hero {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #060f1f 0%, #0a1628 50%, #0d2040 100%);
-    display: flex; align-items: center;
-    padding: 100px 5vw 60px;
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; top: -40%; right: -10%;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(232,160,32,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; }
-  .hero-tag { display: inline-block; background: rgba(232,160,32,0.12); color: var(--accent); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; padding: 6px 14px; margin-bottom: 24px; }
-  .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(42px, 6vw, 72px); font-weight: 700; line-height: 1.05; letter-spacing: 1px; margin-bottom: 24px; }
-  .hero h1 span { color: var(--accent); }
-  .hero p { font-size: 17px; font-weight: 300; color: var(--text-muted); line-height: 1.8; margin-bottom: 40px; max-width: 480px; }
-  .btn-primary { display: inline-block; background: var(--accent); color: var(--navy); font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 16px 36px; text-decoration: none; margin-right: 16px; transition: background 0.2s; }
-  .btn-primary:hover { background: var(--accent-dim); }
-  .btn-ghost { display: inline-block; border: 1px solid rgba(255,255,255,0.2); color: var(--text); font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; padding: 16px 36px; text-decoration: none; transition: border-color 0.2s; }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-  .hero-visual { position: relative; }
-  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-  .stat-card { background: var(--card-bg); border: 1px solid var(--border); padding: 32px 28px; }
-  .stat-card:nth-child(2) { background: var(--accent); }
-  .stat-card:nth-child(2) .stat-num, .stat-card:nth-child(2) .stat-label { color: var(--navy); }
-  .stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 48px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
-  .stat-label { font-size: 13px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+    nav ul a:hover { color: var(--teal-lt); }
 
-  .section { padding: 100px 5vw; max-width: 1200px; margin: 0 auto; }
-  .section-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-  .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(32px, 4vw, 52px); font-weight: 700; line-height: 1.1; margin-bottom: 20px; }
-  .section-sub { font-size: 16px; color: var(--text-muted); font-weight: 300; line-height: 1.8; max-width: 560px; }
+    .nav-cta {
+      background: var(--teal);
+      color: #fff !important;
+      padding: 9px 20px;
+      border-radius: 4px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal-lt) !important; color: #fff !important; }
 
-  .services-wrapper { padding: 100px 5vw; background: #070e1a; }
-  .services-inner { max-width: 1200px; margin: 0 auto; }
-  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
-  .service-card { background: var(--card-bg); border: 1px solid var(--border); padding: 40px 32px; transition: border-color 0.3s; position: relative; overflow: hidden; }
-  .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--accent); transition: height 0.3s; }
-  .service-card:hover { border-color: rgba(232,160,32,0.3); }
-  .service-card:hover::before { height: 100%; }
-  .service-icon { width: 48px; height: 48px; margin-bottom: 24px; opacity: 0.8; }
-  .service-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 14px; }
-  .service-card p { font-size: 14px; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 580px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
 
-  .clients-wrapper { padding: 80px 5vw; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .clients-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 60px; }
-  .clients-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; }
-  .clients-logos { display: flex; gap: 48px; align-items: center; flex-wrap: wrap; }
-  .client-pill { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; opacity: 0.6; }
+    #hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
 
-  .contact-wrapper { padding: 100px 5vw; background: #070e1a; }
-  .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-  .contact-form { display: flex; flex-direction: column; gap: 16px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .contact-form input, .contact-form textarea {
-    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-    color: var(--text); font-family: 'Barlow', sans-serif; font-size: 14px;
-    padding: 14px 18px; outline: none; transition: border-color 0.2s; width: 100%;
-  }
-  .contact-form input:focus, .contact-form textarea:focus { border-color: rgba(232,160,32,0.5); }
-  .contact-form textarea { resize: vertical; min-height: 120px; }
-  .contact-form ::placeholder { color: var(--text-muted); }
-  .contact-info { display: flex; flex-direction: column; gap: 32px; }
-  .contact-detail { display: flex; gap: 16px; align-items: flex-start; }
-  .contact-icon { width: 40px; height: 40px; background: rgba(232,160,32,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .contact-detail-text h4 { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
-  .contact-detail-text p { font-size: 16px; color: var(--text); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        rgba(10,22,40,0.82) 0%,
+        rgba(10,22,40,0.55) 60%,
+        rgba(10,22,40,0.30) 100%
+      );
+      z-index: 1;
+    }
 
-  footer { padding: 40px 5vw; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-  .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 2px; color: var(--accent); }
-  .footer-copy { font-size: 12px; color: var(--text-muted); }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      padding: 0 6%;
+      animation: fadeUp 1s ease both;
+    }
 
-  @media (max-width: 768px) {
-    .hero-grid, .contact-inner { grid-template-columns: 1fr; }
-    .services-grid { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-    .stats-grid { grid-template-columns: 1fr 1fr; }
-    .clients-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
-  }
-</style>
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal-lt);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 2px;
+      background: var(--teal-lt);
+    }
+
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(42px, 6vw, 76px);
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 22px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--teal-lt);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--silver);
+      max-width: 480px;
+      margin-bottom: 38px;
+      line-height: 1.65;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--teal);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--teal-lt); transform: translateY(-2px); }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 13px 28px;
+      border: 1px solid rgba(200,205,216,0.35);
+      color: var(--silver);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--teal-lt); color: var(--teal-lt); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(26,138,110,0.2);
+      border-bottom: 1px solid rgba(26,138,110,0.2);
+      padding: 32px 6%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 0 16px;
+      border-right: 1px solid rgba(200,205,216,0.1);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--teal-lt);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 90px 6%; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal-lt);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--teal-lt);
+    }
+
+    h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    h2 em {
+      font-style: normal;
+      color: var(--teal-lt);
+    }
+
+    .section-intro {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 52px;
+    }
+
+    /* ── SERVICIOS ── */
+    #servicios { background: var(--navy-mid); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .service-card {
+      background: var(--navy);
+      border: 1px solid rgba(26,138,110,0.18);
+      border-radius: 6px;
+      padding: 34px 28px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-4px);
+    }
+
+    .service-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 6px;
+      background: rgba(26,138,110,0.12);
+      border: 1px solid rgba(26,138,110,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .service-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--teal-lt);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .service-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* Video en sección de servicios */
+    .services-video-wrap {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(26,138,110,0.22);
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .services-video-wrap video {
+      width: 100%;
+      display: block;
+    }
+
+    .video-label {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(10,22,40,0.8);
+      border: 1px solid rgba(26,138,110,0.3);
+      border-radius: 4px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal-lt);
+    }
+
+    /* ── NOSOTROS / DIFERENCIAL ── */
+    #nosotros {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .nosotros-text .section-label { margin-bottom: 16px; }
+
+    .diff-list {
+      list-style: none;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .diff-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 15px;
+      color: var(--silver);
+    }
+
+    .diff-list li::before {
+      content: '';
+      display: block;
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal-lt);
+      margin-top: 9px;
+    }
+
+    .clients-strip {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(200,205,216,0.1);
+    }
+
+    .clients-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .clients-logos {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .client-pill {
+      padding: 8px 18px;
+      border: 1px solid rgba(200,205,216,0.15);
+      border-radius: 3px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .nosotros-visual {
+      position: relative;
+    }
+
+    .nosotros-visual img {
+      width: 100%;
+      border-radius: 6px;
+      display: block;
+      object-fit: cover;
+      height: 420px;
+      filter: brightness(0.85) saturate(0.9);
+      border: 1px solid rgba(26,138,110,0.15);
+    }
+
+    .nosotros-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--teal);
+      border-radius: 6px;
+      padding: 22px 26px;
+      max-width: 200px;
+    }
+
+    .nosotros-badge .badge-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .nosotros-badge .badge-txt {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-top: 6px;
+    }
+
+    /* ── CONTACTO ── */
+    #contacto {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('patch-rj45.png');
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+      filter: brightness(0.18) saturate(0.6);
+    }
+
+    .contact-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(10,22,40,0.95) 0%,
+        rgba(10,22,40,0.70) 100%
+      );
+      z-index: 1;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info h2 { margin-bottom: 10px; }
+
+    .contact-info p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .contact-details {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-details li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .contact-details .ci-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(26,138,110,0.15);
+      border: 1px solid rgba(26,138,110,0.3);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-details .ci-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--teal-lt);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-details .ci-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-details .ci-value {
+      font-size: 16px;
+      color: var(--white);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(200,205,216,0.18);
+      border-radius: 4px;
+      padding: 13px 16px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: var(--muted); }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--teal); }
+
+    .contact-form textarea { resize: vertical; min-height: 110px; }
+
+    .contact-form button {
+      padding: 14px 28px;
+      background: var(--teal);
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+
+    .contact-form button:hover { background: var(--teal-lt); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #050d19;
+      padding: 28px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(200,205,216,0.08);
+    }
+
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--silver);
+    }
+
+    .footer-logo span { color: var(--teal-lt); }
+
+    footer p {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .services-grid { grid-template-columns: 1fr; }
+      #nosotros { grid-template-columns: 1fr; gap: 40px; }
+      .nosotros-badge { display: none; }
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      nav ul { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo">BIS SECURITY</div>
-  <ul class="nav-links">
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-  <button class="nav-cta">Consultá ahora</button>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">BIS <span>SECURITY</span></a>
+    <ul>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto" class="nav-cta">Consultá ahora</a></li>
+    </ul>
+  </nav>
 
-<section class="hero">
-  <div class="hero-grid">
-    <div>
-      <div class="hero-tag">Seguridad Electrónica Profesional</div>
-      <h1>Protegemos lo que<br><span>más importa</span></h1>
-      <p>Soluciones integrales de monitoreo, protección perimetral y videovigilancia para empresas. Infraestructura propia, respuesta inmediata.</p>
-      <a href="#contacto" class="btn-primary">Solicitá una consulta</a>
-      <a href="#servicios" class="btn-ghost">Ver servicios</a>
-    </div>
-    <div class="hero-visual">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-num">24/7</div>
-          <div class="stat-label">Monitoreo continuo</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">+10</div>
-          <div class="stat-label">Años de experiencia</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">2</div>
-          <div class="stat-label">Centros de respaldo</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">0</div>
-          <div class="stat-label">Interrupciones en servicio</div>
-        </div>
+  <!-- HERO con video Fort Telecom -->
+  <section id="hero">
+    <!--
+      ⚠️  REEMPLAZAR src con la URL pública del video Fort_Telecom.
+          Opciones: subilo a tu repo de GitHub y usá la URL raw,
+          o subilo a Cloudinary/Vimeo y usá esa URL.
+          Ejemplo: src="https://raw.githubusercontent.com/juanabellone/bis-security/main/videos/fort_telecom.mp4"
+    -->
+    <video id="hero-video" autoplay muted loop playsinline
+           src="fort-telecom.mp4"
+           poster="">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Seguridad Electrónica Profesional</p>
+      <h1>Protegemos lo que<br>más <em>importa</em></h1>
+      <p class="hero-sub">Soluciones integrales de monitoreo, protección perimetral y videovigilancia para empresas. Infraestructura propia, respuesta inmediata.</p>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn-primary">Solicitá una consulta</a>
+        <a href="#servicios" class="btn-ghost">Ver servicios</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="clients-wrapper">
-  <div class="clients-inner">
-    <span class="clients-label">Clientes que confían en nosotros</span>
-    <div class="clients-logos">
-      <span class="client-pill">Telefónica</span>
-      <span class="client-pill">Edelap</span>
-      <span class="client-pill">Empresas industriales</span>
-      <span class="client-pill">Infraestructura pública</span>
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Monitoreo continuo</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">+10</div>
+      <div class="stat-label">Años de experiencia</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Centros de respaldo</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">0</div>
+      <div class="stat-label">Interrupciones de servicio</div>
     </div>
   </div>
-</div>
 
-<div class="services-wrapper" id="servicios">
-  <div class="services-inner">
-    <div class="section-tag">Lo que hacemos</div>
-    <h2 class="section-title">Nuestros servicios</h2>
-    <p class="section-sub">Diseñamos soluciones a medida con tecnología de vanguardia para cada tipo de entorno.</p>
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <p class="section-label">Lo que hacemos</p>
+    <h2>Nuestros <em>servicios</em></h2>
+    <p class="section-intro">Diseñamos soluciones a medida con tecnología de vanguardia para cada tipo de entorno.</p>
+
     <div class="services-grid">
       <div class="service-card">
-        <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="10" stroke="#e8a020" stroke-width="2"/>
-          <circle cx="24" cy="24" r="3" fill="#e8a020"/>
-          <path d="M24 4v6M24 38v6M4 24h6M38 24h6" stroke="#e8a020" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/></svg>
+        </div>
         <h3>Registro y monitoreo de imágenes</h3>
         <p>Solución Dual para registro y monitoreo con duplicación geográfica. Mitigamos riesgos de arquitecturas monolíticas con la mejor relación costo-beneficio.</p>
       </div>
       <div class="service-card">
-        <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="6" y="6" width="36" height="36" rx="2" stroke="#e8a020" stroke-width="2"/>
-          <path d="M6 18h36M18 18v24" stroke="#e8a020" stroke-width="2"/>
-          <circle cx="32" cy="31" r="5" stroke="#e8a020" stroke-width="2"/>
-        </svg>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
         <h3>Protección perimetral</h3>
         <p>Barrera infranqueable para predios industriales con sensores de movimiento, cámaras y detección de intrusos. Cobertura 360° las 24 horas.</p>
       </div>
       <div class="service-card">
-        <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24 4L8 12v14c0 10 7 18 16 22 9-4 16-12 16-22V12L24 4z" stroke="#e8a020" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M16 24l5 5 11-10" stroke="#e8a020" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <h3>Protección contra Vandalismo y robo en vía pública</h3>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Protección contra vandalismo en vía pública</h3>
         <p>Protección especializada para empresas de servicios públicos. Detección precisa, monitoreo en tiempo real y respuesta inmediata ante incidentes.</p>
       </div>
     </div>
-  </div>
-</div>
 
-<section class="section" id="nosotros">
-  <div class="section-tag">Por qué elegirnos</div>
-  <h2 class="section-title">Infraestructura propia.<br>Personal propio.</h2>
-  <p class="section-sub">En BIS Security no tercerizamos la seguridad de nuestros clientes. Contamos con infraestructura y equipo propio para garantizar una respuesta inmediata y confiable.</p>
-</section>
+    <!-- Video Spying -->
+    <div class="services-video-wrap">
+      <!--
+        ⚠️  REEMPLAZAR src con la URL pública del video Spying.
+      -->
+      <video controls playsinline
+             src="spying.mp4">
+      </video>
+      <div class="video-label">Tecnología en acción</div>
+    </div>
+  </section>
 
-<div class="contact-wrapper" id="contacto">
-  <div class="contact-inner">
-    <div>
-      <div class="section-tag">Hablemos</div>
-      <h2 class="section-title">Consultanos sin<br>compromiso</h2>
-      <div class="contact-info" style="margin-top:40px;">
-        <div class="contact-detail">
-          <div class="contact-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <h4>Teléfono</h4>
-            <p>221 524-5466</p>
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8a020" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <h4>Email</h4>
-            <p>info@bis-seguridad.com</p>
-          </div>
+  <!-- NOSOTROS -->
+  <section id="nosotros" style="background: var(--navy);">
+    <div class="nosotros-text">
+      <p class="section-label">Por qué elegirnos</p>
+      <h2>Infraestructura propia.<br><em>Personal propio.</em></h2>
+      <p class="section-intro" style="margin-bottom: 0;">En BIS Security no tercerizamos la seguridad de nuestros clientes. Contamos con infraestructura y equipo propio para garantizar una respuesta inmediata y confiable.</p>
+      <ul class="diff-list">
+        <li>Respuesta inmediata ante incidentes, sin intermediarios.</li>
+        <li>Infraestructura redundante con centros de respaldo geográficamente distribuidos.</li>
+        <li>Personal técnico propio capacitado y certificado.</li>
+        <li>Soluciones a medida para cada tipo de industria y entorno.</li>
+      </ul>
+      <div class="clients-strip">
+        <p class="clients-label">Clientes que confían en nosotros</p>
+        <div class="clients-logos">
+          <span class="client-pill">Telefónica</span>
+          <span class="client-pill">Edelap</span>
+          <span class="client-pill">Industrias</span>
+          <span class="client-pill">Infraestructura pública</span>
         </div>
       </div>
     </div>
-    <div class="contact-form">
-      <div class="form-row">
-        <input type="text" placeholder="Nombre">
-        <input type="text" placeholder="Empresa">
+    <div class="nosotros-visual">
+      <img src="patch-rj45.png" alt="Infraestructura de red BIS Security" />
+      <div class="nosotros-badge">
+        <div class="badge-num">+10</div>
+        <div class="badge-txt">Años protegiendo empresas</div>
       </div>
-      <input type="email" placeholder="Email">
-      <input type="tel" placeholder="Teléfono">
-      <textarea placeholder="Contanos sobre tu proyecto o necesidad..."></textarea>
-      <button class="btn-primary" style="align-self:flex-start; cursor:pointer; border:none;">Enviar consulta</button>
     </div>
-  </div>
-</div>
+  </section>
 
-<footer>
-  <div class="footer-logo">BIS SECURITY</div>
-  <div class="footer-copy">© 2024 BIS Security. La Plata, Buenos Aires.</div>
-</footer>
+  <!-- CONTACTO con fondo patch_rj45 -->
+  <section id="contacto">
+    <div class="contact-bg"></div>
+    <div class="contact-overlay"></div>
+    <div class="contact-inner">
+      <div class="contact-info">
+        <p class="section-label">Hablemos</p>
+        <h2>Consultanos sin <em>compromiso</em></h2>
+        <p>Contanos tu caso y te preparamos una propuesta a medida sin costo.</p>
+        <ul class="contact-details">
+          <li>
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+            </div>
+            <div>
+              <p class="ci-label">Teléfono</p>
+              <p class="ci-value">221 524-5466</p>
+            </div>
+          </li>
+          <li>
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <p class="ci-label">Email</p>
+              <p class="ci-value">info@bis-seguridad.com</p>
+            </div>
+          </li>
+          <li>
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <p class="ci-label">Ubicación</p>
+              <p class="ci-value">La Plata, Buenos Aires</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <form class="contact-form" onsubmit="return false;">
+        <input type="text" placeholder="Nombre" />
+        <input type="email" placeholder="Email" />
+        <input type="text" placeholder="Empresa" />
+        <textarea placeholder="Contanos tu consulta…"></textarea>
+        <button type="submit">Enviar consulta</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">BIS <span>SECURITY</span></div>
+    <p>© 2024 BIS Security. La Plata, Buenos Aires.</p>
+  </footer>
 
 </body>
 </html>
