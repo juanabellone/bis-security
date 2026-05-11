@@ -1154,11 +1154,11 @@
           </li>
         </ul>
       </div>
-      <form class="contact-form" onsubmit="return false;">
-        <input type="text" placeholder="Nombre" />
-        <input type="email" placeholder="Email" />
-        <input type="text" placeholder="Empresa" />
-        <textarea placeholder="Contanos tu consulta…"></textarea>
+      <form class="contact-form" action="https://formspree.io/f/mlgzazgp" method="POST">
+        <input type="text" name="nombre" placeholder="Nombre" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="text" name="empresa" placeholder="Empresa" />
+        <textarea name="mensaje" placeholder="Contanos tu consulta…" required></textarea>
         <button type="submit">Enviar consulta</button>
       </form>
     </div>
