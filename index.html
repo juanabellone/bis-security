@@ -737,6 +737,60 @@
       color: var(--teal-lt);
     }
 
+    /* ── OPEX BANNER ── */
+    .opex-banner {
+      background: linear-gradient(90deg, rgba(26,138,110,0.18) 0%, rgba(26,138,110,0.08) 100%);
+      border-top: 1px solid rgba(26,138,110,0.3);
+      border-bottom: 1px solid rgba(26,138,110,0.3);
+      padding: 22px 6%;
+    }
+
+    .opex-inner {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .opex-icon {
+      flex-shrink: 0;
+      width: 50px;
+      height: 50px;
+      background: rgba(26,138,110,0.2);
+      border: 1px solid rgba(26,138,110,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--teal-lt);
+    }
+
+    .opex-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .opex-highlight {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--teal-lt);
+      letter-spacing: 0.04em;
+    }
+
+    .opex-sub {
+      font-size: 14px;
+      color: var(--silver);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .opex-inner { flex-direction: column; text-align: center; gap: 12px; }
+      .opex-highlight { font-size: 18px; }
+    }
+
     /* ── WHATSAPP BTN ── */
     .whatsapp-btn {
       position: fixed;
@@ -1048,6 +1102,19 @@
     </div>
   </div>
 
+  <!-- BANNER OPEX/CAPEX -->
+  <div class="opex-banner">
+    <div class="opex-inner">
+      <div class="opex-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <div class="opex-text">
+        <span class="opex-highlight">100% OPEX — cero CAPEX</span>
+        <span class="opex-sub">Sin inversión inicial. Nuestros clientes acceden a tecnología de primer nivel sin desembolso de capital.</span>
+      </div>
+    </div>
+  </div>
+
   <!-- SERVICIOS -->
   <section id="servicios">
     <p class="section-label">Lo que hacemos</p>
@@ -1155,6 +1222,28 @@
         </div>
       </div>
 
+      <div class="client-card">
+        <div class="client-card-logo">
+          <img src="logo-almirante.png" alt="Almirante Brown" />
+        </div>
+        <div class="client-card-body">
+          <h3>Almirante Brown</h3>
+          <p>Videovigilancia integral del estadio con cobertura total de las instalaciones, registro de partidos y entrega certificada de filmaciones a APREVIDE y a las autoridades del club.</p>
+          <span class="client-tag">Deporte y eventos</span>
+        </div>
+      </div>
+
+      <div class="client-card">
+        <div class="client-card-logo client-card-logo--text">
+          <span>HCT</span>
+        </div>
+        <div class="client-card-body">
+          <h3>HCT</h3>
+          <p>Soluciones de seguridad electrónica integradas a la infraestructura IT de la empresa, con monitoreo centralizado y gestión remota de accesos.</p>
+          <span class="client-tag">Tecnología</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1168,13 +1257,13 @@
         <h2>Consultanos sin <em>compromiso</em></h2>
         <p>Contanos tu caso y te preparamos una propuesta a medida sin costo.</p>
         <div class="contact-cards">
-          <a href="tel:+542215245466" class="contact-card">
+          <a href="tel:+542216747138" class="contact-card">
             <div class="cc-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
             </div>
             <div class="cc-text">
               <span class="cc-label">Teléfono</span>
-              <span class="cc-value">221 524-5466</span>
+              <span class="cc-value">221 674-7138</span>
             </div>
           </a>
           <a href="mailto:seguridad.bis@gmail.com" class="contact-card">
