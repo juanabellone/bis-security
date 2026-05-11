@@ -729,86 +729,141 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── RESPONSIVE TABLET ── */
+    /* ── HAMBURGUESA ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 200;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--silver);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── RESPONSIVE TABLET (901px — 1024px) ── */
+    @media (max-width: 1024px) {
+      .clients-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── RESPONSIVE TABLET CHICA (601px — 900px) ── */
     @media (max-width: 900px) {
       .services-grid { grid-template-columns: 1fr; }
       #nosotros { grid-template-columns: 1fr; gap: 40px; }
       .nosotros-badge { display: none; }
       .contact-inner { grid-template-columns: 1fr; gap: 40px; }
       .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-      nav ul { display: none; }
-    }
 
-    /* ── RESPONSIVE MOBILE ── */
-    @media (max-width: 480px) {
-      nav { padding: 0 4%; height: 58px; }
+      .nav-hamburger { display: flex; }
 
-      .nav-logo { font-size: 18px; }
-
-      section { padding: 60px 5%; }
-
-      #hero { min-height: 100svh; }
-
-      .hero-content { padding: 0 5%; }
-
-      h1 { font-size: clamp(28px, 8vw, 42px); line-height: 1.08; }
-
-      h2 { font-size: clamp(26px, 7vw, 36px); }
-
-      .hero-sub { font-size: 15px; }
-
-      .hero-actions { flex-direction: column; gap: 10px; }
-
-      .btn-primary, .btn-ghost { text-align: center; padding: 13px 20px; }
-
-      .stats-bar {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 24px 5%;
-        gap: 20px;
+      #nav-menu {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(7, 16, 31, 0.98);
+        backdrop-filter: blur(12px);
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        z-index: 150;
       }
 
-      .stat { border-right: none; border-bottom: 1px solid rgba(200,205,216,0.1); padding-bottom: 16px; }
+      #nav-menu.open { display: flex; }
 
+      #nav-menu li { list-style: none; }
+
+      #nav-menu a {
+        font-size: 28px;
+        font-family: "Rajdhani", sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--white);
+        text-decoration: none;
+      }
+
+      #nav-menu a:hover { color: var(--teal-lt); }
+
+      #nav-menu .nav-cta {
+        background: var(--teal);
+        padding: 12px 32px;
+        border-radius: 4px;
+        color: #fff !important;
+        font-size: 20px;
+      }
+    }
+
+    /* ── RESPONSIVE MOBILE (hasta 600px) ── */
+    @media (max-width: 600px) {
+      nav { padding: 0 5%; height: 58px; }
+
+      section { padding: 56px 5%; }
+
+      #hero { min-height: 100svh; }
+      .hero-content { padding: 0 5%; }
+
+      h1 { font-size: clamp(26px, 9vw, 40px); line-height: 1.08; }
+      h2 { font-size: clamp(24px, 8vw, 34px); }
+
+      .hero-sub { font-size: 15px; }
+      .hero-actions { flex-direction: column; gap: 10px; }
+      .btn-primary, .btn-ghost { text-align: center; padding: 13px 20px; width: 100%; }
+
+      .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 24px 5%; gap: 0; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(200,205,216,0.1); padding: 16px 8px; }
       .stat:nth-child(odd) { border-right: 1px solid rgba(200,205,216,0.1); }
-
       .stat:nth-last-child(-n+2) { border-bottom: none; }
+      .stat-number { font-size: 32px; }
+      .stat-label { font-size: 10px; }
 
-      .stat-number { font-size: 34px; }
+      .services-grid { grid-template-columns: 1fr; gap: 14px; }
+      .service-card { padding: 22px 18px; }
 
-      .services-grid { grid-template-columns: 1fr; gap: 16px; }
+      #nosotros { grid-template-columns: 1fr; gap: 28px; padding: 56px 5%; }
+      .nosotros-visual img { height: 220px; }
 
-      .service-card { padding: 24px 20px; }
+      .clients-grid { grid-template-columns: 1fr; gap: 14px; }
+      .client-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 22px 18px; }
+      .client-card-logo { width: 64px; height: 64px; }
+      .client-card-logo--text span { font-size: 22px; }
+      .client-card-body h3 { font-size: 18px; }
 
-      #nosotros { grid-template-columns: 1fr; gap: 32px; padding: 60px 5%; }
-
-      .nosotros-visual img { height: 240px; }
-
-      .clients-logos { gap: 10px; }
-
-      .client-pill { font-size: 11px; padding: 6px 12px; }
-
-      .contact-inner { grid-template-columns: 1fr; gap: 32px; }
-
+      .contact-inner { grid-template-columns: 1fr; gap: 28px; }
       .contact-form button { width: 100%; text-align: center; }
 
       footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 5%; }
-      .clients-grid { grid-template-columns: 1fr; }
-      .client-card { flex-direction: column; text-align: center; padding: 24px 20px; }
-      .client-card-logo { width: 70px; height: 70px; }
     }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav>
+  <nav id="main-nav">
     <a class="nav-logo" href="#">BIS <span>SECURITY</span></a>
-    <ul>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#nosotros">Nosotros</a></li>
-      <li><a href="#clientes">Clientes</a></li>
-      <li><a href="#contacto" class="nav-cta">Consultá ahora</a></li>
+    <ul id="nav-menu">
+      <li><a href="#servicios" class="nav-link">Servicios</a></li>
+      <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+      <li><a href="#clientes" class="nav-link">Clientes</a></li>
+      <li><a href="#contacto" class="nav-cta nav-link">Consultá ahora</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-toggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- HERO con video Fort Telecom -->
@@ -1020,5 +1075,21 @@
     <p>© 2024 BIS Security. La Plata, Buenos Aires.</p>
   </footer>
 
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-menu');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      menu.classList.toggle('open');
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('open');
+        menu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
 </body>
 </html>
