@@ -774,36 +774,43 @@
         display: none;
         flex-direction: column;
         position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(7, 16, 31, 0.98);
-        backdrop-filter: blur(12px);
+        top: 58px; left: 0; right: 0; bottom: 0;
+        background: #07101f;
         align-items: center;
         justify-content: center;
-        gap: 32px;
+        gap: 28px;
         z-index: 150;
+        padding: 40px 20px;
+        list-style: none;
       }
 
       #nav-menu.open { display: flex; }
 
-      #nav-menu li { list-style: none; }
+      #nav-menu li { list-style: none; width: 100%; text-align: center; }
 
       #nav-menu a {
-        font-size: 28px;
+        display: block;
+        font-size: 26px;
         font-family: "Rajdhani", sans-serif;
         font-weight: 700;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         color: var(--white);
         text-decoration: none;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(200,205,216,0.08);
+        transition: color 0.2s;
       }
 
       #nav-menu a:hover { color: var(--teal-lt); }
 
-      #nav-menu .nav-cta {
+      #nav-menu li:last-child a {
         background: var(--teal);
-        padding: 12px 32px;
+        border: none;
         border-radius: 4px;
-        color: #fff !important;
+        color: #fff;
+        margin-top: 12px;
+        padding: 14px 0;
         font-size: 20px;
       }
     }
