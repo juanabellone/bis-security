@@ -729,6 +729,56 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    /* ── MOBILE PANEL ── */
+    #mobile-panel {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 9999;
+      background: #07101f;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    #mobile-panel.open { display: flex; align-items: center; justify-content: center; }
+
+    #mobile-panel-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 0 32px;
+    }
+
+    .mobile-link {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-family: "Rajdhani", sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(200,205,216,0.1);
+      transition: color 0.2s;
+    }
+
+    .mobile-link:hover { color: var(--teal-lt); }
+
+    .mobile-cta {
+      background: var(--teal);
+      border: none;
+      border-radius: 4px;
+      color: #fff !important;
+      margin-top: 16px;
+      padding: 16px 0;
+      font-size: 22px;
+    }
+
     /* ── HAMBURGUESA ── */
     .nav-hamburger {
       display: none;
@@ -862,6 +912,16 @@
   </style>
 </head>
 <body>
+
+  <!-- MOBILE MENU PANEL (fuera del nav, cubre todo) -->
+  <div id="mobile-panel">
+    <div id="mobile-panel-inner">
+      <a href="#servicios" class="nav-link mobile-link">Servicios</a>
+      <a href="#nosotros" class="nav-link mobile-link">Nosotros</a>
+      <a href="#clientes" class="nav-link mobile-link">Clientes</a>
+      <a href="#contacto" class="nav-link mobile-link mobile-cta">Consultá ahora</a>
+    </div>
+  </div>
 
   <!-- NAV -->
   <nav id="main-nav">
@@ -1088,30 +1148,26 @@
 
   <script>
     const toggle = document.getElementById('nav-toggle');
-    const menu = document.getElementById('nav-menu');
+    const panel = document.getElementById('mobile-panel');
     const video = document.getElementById('hero-video');
 
     function openMenu() {
-      menu.classList.add('open');
+      panel.classList.add('open');
       toggle.classList.add('open');
       document.body.style.overflow = 'hidden';
-      document.body.style.backgroundColor = '#07101f';
-      if (video) video.pause();
     }
 
     function closeMenu() {
-      menu.classList.remove('open');
+      panel.classList.remove('open');
       toggle.classList.remove('open');
       document.body.style.overflow = '';
-      document.body.style.backgroundColor = '';
-      if (video) video.play();
     }
 
     toggle.addEventListener('click', () => {
-      menu.classList.contains('open') ? closeMenu() : openMenu();
+      panel.classList.contains('open') ? closeMenu() : openMenu();
     });
 
-    document.querySelectorAll('.nav-link').forEach(link => {
+    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
       link.addEventListener('click', closeMenu);
     });
   </script>
