@@ -515,42 +515,55 @@
       margin-bottom: 40px;
     }
 
-    .contact-details {
-      list-style: none;
+    .contact-cards {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 12px;
     }
 
-    .contact-details li {
+    .contact-card {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(26,138,110,0.2);
+      border-radius: 8px;
+      padding: 16px 20px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
     }
 
-    .contact-details .ci-icon {
-      width: 40px;
-      height: 40px;
+    .contact-card:hover {
+      background: rgba(26,138,110,0.1);
+      border-color: var(--teal);
+      transform: translateX(4px);
+    }
+
+    .cc-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
       background: rgba(26,138,110,0.15);
       border: 1px solid rgba(26,138,110,0.3);
-      border-radius: 4px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      color: var(--teal-lt);
     }
 
-    .contact-details .ci-icon svg {
-      width: 18px;
-      height: 18px;
-      stroke: var(--teal-lt);
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .cc-icon svg {
+      width: 20px;
+      height: 20px;
     }
 
-    .contact-details .ci-label {
+    .cc-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .cc-label {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.12em;
@@ -558,8 +571,9 @@
       color: var(--muted);
     }
 
-    .contact-details .ci-value {
-      font-size: 16px;
+    .cc-value {
+      font-size: 15px;
+      font-weight: 500;
       color: var(--white);
     }
 
@@ -721,6 +735,35 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--teal-lt);
+    }
+
+    /* ── WHATSAPP BTN ── */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 58px;
+      height: 58px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-decoration: none;
+      z-index: 500;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+    }
+
+    .whatsapp-btn svg {
+      width: 30px;
+      height: 30px;
     }
 
     /* ── ANIMATIONS ── */
@@ -1124,35 +1167,35 @@
         <p class="section-label">Hablemos</p>
         <h2>Consultanos sin <em>compromiso</em></h2>
         <p>Contanos tu caso y te preparamos una propuesta a medida sin costo.</p>
-        <ul class="contact-details">
-          <li>
-            <div class="ci-icon">
-              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+        <div class="contact-cards">
+          <a href="tel:+542215245466" class="contact-card">
+            <div class="cc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
             </div>
-            <div>
-              <p class="ci-label">Teléfono</p>
-              <p class="ci-value">221 524-5466</p>
+            <div class="cc-text">
+              <span class="cc-label">Teléfono</span>
+              <span class="cc-value">221 674-7138</span>
             </div>
-          </li>
-          <li>
-            <div class="ci-icon">
-              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+          <a href="mailto:info@bis-seguridad.com" class="contact-card">
+            <div class="cc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
-            <div>
-              <p class="ci-label">Email</p>
-              <p class="ci-value">info@bis-seguridad.com</p>
+            <div class="cc-text">
+              <span class="cc-label">Email</span>
+              <span class="cc-value">info@bis-seguridad.com</span>
             </div>
-          </li>
-          <li>
-            <div class="ci-icon">
-              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </a>
+          <a href="https://maps.google.com/?q=La+Plata+Buenos+Aires" target="_blank" class="contact-card">
+            <div class="cc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
-            <div>
-              <p class="ci-label">Ubicación</p>
-              <p class="ci-value">La Plata, Buenos Aires</p>
+            <div class="cc-text">
+              <span class="cc-label">Ubicación</span>
+              <span class="cc-value">La Plata, Buenos Aires</span>
             </div>
-          </li>
-        </ul>
+          </a>
+        </div>
       </div>
       <form class="contact-form" id="contact-form">
         <input type="hidden" name="access_key" value="698191e5-0247-48f1-b694-10953ace0635" />
@@ -1178,6 +1221,17 @@
     <div class="footer-logo">BIS <span>SECURITY</span></div>
     <p>© 2024 BIS Security. La Plata, Buenos Aires.</p>
   </footer>
+
+  <!-- BOTÓN WHATSAPP FLOTANTE -->
+  <a href="https://wa.me/5492216747138?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20sus%20servicios%20de%20seguridad." 
+     target="_blank" 
+     class="whatsapp-btn" 
+     aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.137.564 4.14 1.534 5.876L0 24l6.296-1.507A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.733.894.942-3.629-.235-.373A9.818 9.818 0 1112 21.818z"/>
+    </svg>
+  </a>
 
   <script>
     const contactForm = document.getElementById('contact-form');
