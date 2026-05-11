@@ -838,10 +838,13 @@
       .nosotros-visual img { height: 220px; }
 
       .clients-grid { grid-template-columns: 1fr; gap: 14px; }
-      .client-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 22px 18px; }
-      .client-card-logo { width: 64px; height: 64px; }
-      .client-card-logo--text span { font-size: 22px; }
-      .client-card-body h3 { font-size: 18px; }
+      .client-card { flex-direction: row; align-items: center; gap: 16px; padding: 20px 16px; }
+      .client-card-logo { flex-shrink: 0; width: 56px; height: 56px; min-width: 56px; }
+      .client-card-logo img { width: 42px; height: 42px; }
+      .client-card-logo--text span { font-size: 18px; }
+      .client-card-body { min-width: 0; overflow: hidden; }
+      .client-card-body h3 { font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .client-card-body p { font-size: 13px; }
 
       .contact-inner { grid-template-columns: 1fr; gap: 28px; }
       .contact-form button { width: 100%; text-align: center; }
