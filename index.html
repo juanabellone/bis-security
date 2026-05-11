@@ -640,7 +640,7 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── RESPONSIVE ── */
+    /* ── RESPONSIVE TABLET ── */
     @media (max-width: 900px) {
       .services-grid { grid-template-columns: 1fr; }
       #nosotros { grid-template-columns: 1fr; gap: 40px; }
@@ -648,6 +648,61 @@
       .contact-inner { grid-template-columns: 1fr; gap: 40px; }
       .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 24px; }
       nav ul { display: none; }
+    }
+
+    /* ── RESPONSIVE MOBILE ── */
+    @media (max-width: 480px) {
+      nav { padding: 0 4%; height: 58px; }
+
+      .nav-logo { font-size: 18px; }
+
+      section { padding: 60px 5%; }
+
+      #hero { min-height: 100svh; }
+
+      .hero-content { padding: 0 5%; }
+
+      h1 { font-size: clamp(28px, 8vw, 42px); line-height: 1.08; }
+
+      h2 { font-size: clamp(26px, 7vw, 36px); }
+
+      .hero-sub { font-size: 15px; }
+
+      .hero-actions { flex-direction: column; gap: 10px; }
+
+      .btn-primary, .btn-ghost { text-align: center; padding: 13px 20px; }
+
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 24px 5%;
+        gap: 20px;
+      }
+
+      .stat { border-right: none; border-bottom: 1px solid rgba(200,205,216,0.1); padding-bottom: 16px; }
+
+      .stat:nth-child(odd) { border-right: 1px solid rgba(200,205,216,0.1); }
+
+      .stat:nth-last-child(-n+2) { border-bottom: none; }
+
+      .stat-number { font-size: 34px; }
+
+      .services-grid { grid-template-columns: 1fr; gap: 16px; }
+
+      .service-card { padding: 24px 20px; }
+
+      #nosotros { grid-template-columns: 1fr; gap: 32px; padding: 60px 5%; }
+
+      .nosotros-visual img { height: 240px; }
+
+      .clients-logos { gap: 10px; }
+
+      .client-pill { font-size: 11px; padding: 6px 12px; }
+
+      .contact-inner { grid-template-columns: 1fr; gap: 32px; }
+
+      .contact-form button { width: 100%; text-align: center; }
+
+      footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 5%; }
     }
   </style>
 </head>
