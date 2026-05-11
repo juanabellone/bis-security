@@ -1155,10 +1155,13 @@
         </ul>
       </div>
       <form class="contact-form" id="contact-form">
-        <input type="text" name="nombre" placeholder="Nombre" required />
+        <input type="hidden" name="access_key" value="698191e5-0247-48f1-b694-10953ace0635" />
+        <input type="hidden" name="subject" value="Nueva consulta desde BIS Security" />
+        <input type="hidden" name="from_name" value="BIS Security Web" />
+        <input type="text" name="name" placeholder="Nombre" required />
         <input type="email" name="email" placeholder="Email" required />
         <input type="text" name="empresa" placeholder="Empresa" />
-        <textarea name="mensaje" placeholder="Contanos tu consulta…" required></textarea>
+        <textarea name="message" placeholder="Contanos tu consulta…" required></textarea>
         <button type="submit" id="submit-btn">Enviar consulta</button>
         <div id="form-success" style="display:none; padding: 14px 18px; background: rgba(26,138,110,0.15); border: 1px solid rgba(26,138,110,0.4); border-radius: 4px; color: #22b58f; font-size: 14px; font-weight: 500;">
           ✓ Mensaje enviado. Te contactamos a la brevedad.
@@ -1189,24 +1192,23 @@
         success.style.display = 'none';
         error.style.display = 'none';
         try {
-          const res = await fetch('https://formspree.io/f/mlgzazgp', {
+          const res = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            body: new FormData(contactForm),
-            headers: { 'Accept': 'application/json' }
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))
           });
-          if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
             success.style.display = 'block';
             contactForm.reset();
-            btn.textContent = 'Enviar consulta';
-            btn.disabled = false;
           } else {
             throw new Error('Error');
           }
         } catch {
           error.style.display = 'block';
-          btn.textContent = 'Enviar consulta';
-          btn.disabled = false;
         }
+        btn.textContent = 'Enviar consulta';
+        btn.disabled = false;
       });
     }
   </script>
