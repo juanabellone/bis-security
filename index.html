@@ -774,7 +774,8 @@
         display: none;
         flex-direction: column;
         position: fixed;
-        top: 58px; left: 0; right: 0; bottom: 0;
+        top: 0; left: 0; right: 0; bottom: 0;
+        padding-top: 80px;
         background: #07101f;
         align-items: center;
         justify-content: center;
@@ -1089,22 +1090,21 @@
     const toggle = document.getElementById('nav-toggle');
     const menu = document.getElementById('nav-menu');
     const video = document.getElementById('hero-video');
-    const hero = document.getElementById('hero');
 
     function openMenu() {
       menu.classList.add('open');
       toggle.classList.add('open');
       document.body.style.overflow = 'hidden';
+      document.body.style.backgroundColor = '#07101f';
       if (video) video.pause();
-      if (hero) hero.style.visibility = 'hidden';
     }
 
     function closeMenu() {
       menu.classList.remove('open');
       toggle.classList.remove('open');
       document.body.style.overflow = '';
+      document.body.style.backgroundColor = '';
       if (video) video.play();
-      if (hero) hero.style.visibility = 'visible';
     }
 
     toggle.addEventListener('click', () => {
